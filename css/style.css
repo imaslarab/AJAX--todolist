@@ -1,6 +1,9 @@
 * {
 	margin: 0;
 	padding: 0;
+	font-size: 20px;
+	font-family: serif;
+	color: #4d4d4d;
 }
 
 body {
@@ -11,13 +14,13 @@ body {
 body h1 {
 	text-align: center;
 	padding: 5px 0;
-	color: #f7bd35;
+	color: #e67373;
 	font-size: 40px;
 }
 
 ul li {
 	list-style: none;
-	padding: 5px;
+	/*padding: 5px;*/
 }
 
 ul li button {
@@ -25,19 +28,96 @@ ul li button {
 	margin: 0 5px;
 }
 
+ul li input {
+	color: #c6c3c3;
+}
+
+input[type="checkbox"] {
+	width: 20px;
+	height: 20px;
+	color: green;
+	text-decoration: none;
+	border-radius: 10px solid black;
+	padding: 10px;
+}
+
 .container {
 	background: #ffffff;
 	border: 1px solid #e6e6e6;
-	box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.2);
+	box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.2);
 	margin: 0 auto;
-	padding: 10px;
 	width: 550px;
 	height: 400px;
-	overflow: auto;
+	overflow-y: auto;
+}
 
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background : rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+	background : rgba(0, 0, 0, 0.3);
+}
+
+.container form {
+	border-bottom: 1px solid #e6e6e6;
+	padding: 20px 20px 50px 20px;
+	display: block;
+}
+
+.container form input {
+	float: left;
+}
+
+#todo {
+	border: 1px solid #e6e6e6;
+	padding: 5px 10px;
+	margin-right: 10px;
 }
 		
+.add {
+	border: none;
+	background: none;
+	background-image: url('../images/add-icon.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	width: 30px;
+	height: 30px;
+}
+
 #todo-list li {
 	border-bottom: 1px solid #e6e6e6;
+	padding: 10px;
 	line-height: 30px;
+}
+
+
+
+.edit {
+	border: none;
+	background: none;
+	background-image: url('../images/edit-icon.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	width: 25px;
+	height: 25px;
+}
+
+.delete {
+	border: none;
+	background: none;
+	background-image: url('../images/delete-icon.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	width: 25px;
+	height: 25px;
+}
+
+.completed {
+	color: #c6c3c3;
+	text-decoration: line-through;
 }
