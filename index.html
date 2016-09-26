@@ -2,24 +2,28 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-    <title>Todo-List</title>
-    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+  <title>Todo-List</title>
+  <link rel="stylesheet" type="text/css" href="./css/style.css" />
 </head>
+
 <body>
 	<h1>todo list</h1>
 
 	<div class="container">	
 		<form>
-			<input id="todo" type="text" placeholder="todo here"/>
-			<input type="button" value="ADD" onclick="addTodo()"/>
+			<input id="todo" type="text" placeholder="todos here"/>
+			<input id="add-todo" class="add" type="button"/>
 		</form>
 		<ul id="todo-list">			
 		</ul>
 	</div>
 
-
-<script src="./js/utils/HttpUtil.js"></script>
-<script src="./js/index.js"></script>
+	<script src="./js/utils/HttpUtil.js"></script>
+	<script src="./js/index.js"></script>
+	<script type="text/javascript">
+		var renderValue = new Render();
+		renderValue.init();
+	</script>
 
 </body>
 </html>
