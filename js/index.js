@@ -1,3 +1,4 @@
+'use strict';
 function Render() {
 
 	var that = this;
@@ -13,8 +14,9 @@ function Render() {
 		container = document.getElementById('todo-list');
 
 		addBtn.addEventListener('click', function() {
-			addTodo()
+			addTodo();
 		});
+
 		httpUtil.get(render);
 	}
 
@@ -30,9 +32,9 @@ function Render() {
 			var label = document.createElement('label');
 			label.innerHTML = todo.title;
 
-
 			var deleteBtn = document.createElement('button');
 			deleteBtn.setAttribute('class', 'delete');
+
 			var editBtn = document.createElement('button');
 			editBtn.setAttribute('class', 'edit');
 			
@@ -65,7 +67,7 @@ function Render() {
 				
 				newInput.addEventListener( 'keypress', function(event) {
 					if(event.keyCode == 13) {
-						editTodo(todo.id, newInput.value)
+						editTodo(todo.id, newInput.value);
 					}
 				});
 								
@@ -81,7 +83,7 @@ function Render() {
 		};
 
 		httpUtil.post(todo, function() {
-			httpUtil.get(render)
+			httpUtil.get(render);
 		});		
 	}
 
