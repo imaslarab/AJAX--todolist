@@ -2,39 +2,34 @@ function Render() {
 
 	var that = this;
 	
-	this.URL = 'http://todo-simple-api.herokuapp.com/todos';
-	this.httpUtil = new HttpUtil();	
+	var URL = 'http://todo-simple-api.herokuapp.com/todos';
+	var httpUtil = new HttpUtil();	
 
-	this.container;
-	this.addBtn;
+	var container;
+	var addBtn;
 	
-	this.init = function(id) {
-			that.addBtn = document.getElementById('add-todo');
-			that.container = document.getElementById(id);
+	this.init = function() {
+		addBtn = document.getElementById('add-todo');
+		container = document.getElementById('todo-list');
 
-			that.addBtn.addEventListener('click', function() {
-				that.addTodo()
-			});
-			that.httpUtil.get(that.render);
+		addBtn.addEventListener('click', function() {
+			addTodo()
+		});
+		httpUtil.get(render);
 	}
 
-	this.render = function(todos) {
-
-		that.container.innerHTML='';
+	function render (todos) {
+		container.innerHTML = '';
 
 		todos.data.forEach(function (todo) {		
 			var list = document.createElement('LI');
 
 			var checkBox = document.createElement('input');
-			checkBox.type = "checkbox";
-			checkBox.setAttribute = ('class', 'check-box');
+			checkBox.type = 'checkbox';
 
 			var label = document.createElement('label');
 			label.innerHTML = todo.title;
-			if( checkBox.checked == 'true') {
-				label.setAttribute('class', 'completed');
-				checkBox.disabled = 'true';
-			}
+
 
 			var deleteBtn = document.createElement('button');
 			deleteBtn.setAttribute('class', 'delete');
@@ -45,10 +40,20 @@ function Render() {
 			list.appendChild(label);
 			list.appendChild(deleteBtn);
 			list.appendChild(editBtn);
-			that.container.appendChild(list);
+			container.appendChild(list);
+
+			checkBox.addEventListener('change', function() {
+				console.log(label);
+				if(checkBox.checked) {
+					label.setAttribute('class', 'completed');
+				}
+				else {
+					label.setAttribute('class', '');
+				}
+			});
 
 			deleteBtn.addEventListener('click', function() {
-				that.deleteTodo(todo.id)
+				deleteTodo(todo.id)
 			});
 
 			var newInput = document.createElement('input');
@@ -56,45 +61,46 @@ function Render() {
 			newInput.value = todo.title; 
 			
 			editBtn.addEventListener('click', function() {
-				list.appendChild(newInput);
+				list.replaceChild(newInput,label);
 				
-				newInput.addEventListener( 'keyup', function() {
-				that.editTodo(todo.id, newInput.value)
+				newInput.addEventListener( 'keypress', function(event) {
+					if(event.keyCode == 13) {
+						editTodo(todo.id, newInput.value)
+					}
 				});
 								
 			});
-
-
 		});
 	}
 
-	this.addTodo = function() {
+	function addTodo () {
 		var todo = {
 			title: document.getElementById('todo').value,
 			description: '',
 			isComplete: false
 		};
 
-		that.httpUtil.post(todo, function() {
-			that.httpUtil.get(that.render)
+		httpUtil.post(todo, function() {
+			httpUtil.get(render)
 		});		
 	}
 
-	this.deleteTodo = function(todoId) {
-			alert("Todo is deleted");
-			that.httpUtil.delete(todoId, function() {
-				that.httpUtil.get(that.render); 	
-			});
+	function deleteTodo (todoId) {
+		alert('Todo is deleted');
+		httpUtil.delete(todoId, function() {
+			httpUtil.get(render); 	
+		});
 	}
 
-	this.editTodo = function(todoId, newTitle) {
-			var todo = {
-				title: newTitle,
-				description: '',
-				isComplete: false
-			};
-			that.httpUtil.put(todoId, todo, function() {
-				that.httpUtil.get(that.render); 	
-			});
+	function editTodo (todoId, newTitle) {
+		var todo = {
+			title: newTitle,
+			description: '',
+			isComplete: false
+		};
+		httpUtil.put(todoId, todo, function() {
+			httpUtil.get(render); 	
+		});
 	}
+
 }
